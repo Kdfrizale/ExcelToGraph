@@ -1,0 +1,9 @@
+Graph:
+  # splines: ortho
+  ratio: fill
+  size: 8.3,11.7!
+  margin: '0' 
+  # format: png
+  ranksep: '1.0 equally'
+  # concentrate : 'true' #merge edges that are parallel and have common endpoint
+      

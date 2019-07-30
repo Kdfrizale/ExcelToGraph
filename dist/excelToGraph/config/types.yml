@@ -1,0 +1,47 @@
+Server:
+  image: images/Application_server.png
+  labelloc: b
+  shape : plaintext
+  # style : dashed
+  # fixedsize : 'true'
+  width : '0.75'
+  height : '0.75' 
+  # margin : '0.5,0.5'
+  # fontcolor : red
+  # fontname : helvetica
+  # penwidth : 0
+  ordering: out
+  showInTable: 
+    - Name
+    - IP
+    - comment
+  typeConnectionsTo:
+    Client :
+      connectionStyle:
+        color : purple
+        sametail: serverclient
+    SAN :
+      connectionStyle:
+        color : blue
+
+Database:
+  image: images/Application_server.png
+  labelloc: b
+  shape : plaintext
+  # style : dashed
+  # fixedsize : 'true'
+  width : '0.75'
+  height : '0.75' 
+  # margin : '0.5,0.5'
+  # fontcolor : red
+  # fontname : helvetica
+  # penwidth : 0
+  ordering: out
+      
+
+Client:
+  shape: box
+  showInTable:
+    - Name
+    - IP
+    - comment
