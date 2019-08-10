@@ -116,6 +116,8 @@ Client:
 
 ### Restrictions - Column Headers
 * Every Tab needs an ID column header, this value must be unique to the element whether it is a Node, Connection, or Cluster
+* The Connections Tab also requires ColumnHeaders for 'fromID' and 'toID'
+* The Clusters Tab also requires ColumnHeaders for 'Nodes' # which is a comma separated list of Node IDs
 * All other columns follow the convention of the ColumnHeader = GraphViz Attribute Name, with the associated attibute value below for each Node, Connection, or Cluster
   * See all possible graphviz attributes at https://www.graphviz.org/doc/info/attrs.html
   * These column attributes are great if you need to specify an attribute for a particular node, if you want all nodes of that Type (Tab on Excel Spreadsheet) then it would be better to define that in the config/types.yml file
