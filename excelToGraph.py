@@ -52,7 +52,7 @@ def appendNodesDict(excelBook,tabName, nodeDict):
 	keys = [str(sheet.cell(0,col_index).value) for col_index in range(sheet.ncols)]
 
 	for row_index in range(1,sheet.nrows):
-		tmp_id = str(sheet.cell(row_index,0).value)
+		tmp_id = str(sheet.cell(row_index,keys.index("ID")).value)
 		tmp_dictAttribute = {keys[col_index] : str(sheet.cell(row_index, col_index).value) for col_index in range(1,sheet.ncols)}
 		combineAttributeDicts(tmp_dictAttribute, types_config.get(tabName,{}))
 		tmp_node = Node(tmp_id, tmp_dictAttribute)
