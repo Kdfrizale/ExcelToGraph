@@ -1,7 +1,7 @@
 # ExcelToGraph
 
 # Motivation
-This project was created to allow quick and easy creation of graph diagrams.  The main idea is for the user to define Nodes, Connections, and Groups in an Excel document, and the let the program create the graph visual layout follwing a configuration file.
+This project was created to allow quick and easy creation of graph diagrams.  The main idea is for the user to define Nodes, Connections, and Groups in an Excel document, and the let the program create the graph visual layout following a configuration file.
 
 ## Getting Started
 ### Prerequisites
@@ -14,7 +14,7 @@ Note: The dist folder contains an executable version of this project that uses a
 ### Step  1
 ```
 Create an Excel Spreadsheet with at minimum three tabs ('Connections', 'Clusters', and 'yourCustomNodeName')
-Note: the tabs Connections and Clusters must be named as so, all other tabs will be considered for Nodes.
+Note: the tabs Connections and Clusters must be named as so, all other tabs will be considered as Nodes.
 ```
 
 ### Step 2
@@ -40,12 +40,13 @@ excelToGraph -o --outputname  "MyOutputGraph"  ## Set output filename
 excelToGraph -e --engine  "dot"  ## Select one of Graphviz's built-in engines
 excelToGraph -i --inputfile "MyExcelDocument.xlsx"  ## Select Excel file to read from, Setting the input file will also skip over the GUI file selector
 excelToGraph -f --outputformat "png"  ## Select what file format to save the output (i.e. png, pdf, jpg, etc)
-excelToGraph -d --outputdirectory
+excelToGraph -d --outputdirectory  ## Select the Directory where the output file should be saved
 ```
 
 ## Config Files
 ### Graph.yml
 Set default graphviz attributes for the global graph
+
 Example:
 ```
 Graph:
@@ -61,6 +62,7 @@ Graph:
  
  ### Types.yml
  Define default styles for each Type of Node (Tabs in Excel Spreadsheet)
+ 
  Example:
  ```
  Server:
@@ -104,16 +106,42 @@ Client:
   shape: box
 ```
 
-## Excel Document
+## Excel Document Usage
+### Restrictions - Tab Names
 * Must contain a 'Clusters' tab 
   * used to define groups of nodes within the graph
 * Must contain a 'Connections' tab
   * used to define connections/edges between nodes
 * All other tabs will be treated as a type of Node
 
-* The only restriction on defining elements in the Excel document, is that the first column be used as a Unique Identification for the Cluster, Connection, or Node
-* All other columns follow the convention of the ColumnHeader = GraphViz Attribute Name, with the associate attibute value below for each Node, Connection, or Cluster
+### Restrictions - Column Headers
+* Every Tab needs an ID column header, this value must be unique to the element whether it is a Node, Connection, or Cluster
+* All other columns follow the convention of the ColumnHeader = GraphViz Attribute Name, with the associated attibute value below for each Node, Connection, or Cluster
   * See all possible graphviz attributes at https://www.graphviz.org/doc/info/attrs.html
+  * These column attributes are great if you need to specify an attribute for a particular node, if you want all nodes of that Type (Tab on Excel Spreadsheet) then it would be better to define that in the config/types.yml file
+  
+Node Tab Example:
+
+| ID | xLabel | shape |
+| -- | ------ | ----- |
+| Node1 | myNodeLabel1 | tab |
+| Node2 | myNodeLabel2 |  |
+| Node3 | myNodeLabel3 | box |
+
+Connections Tab Example:
+
+| ID | fromID | toID | color |
+| -- | ------ | ---- | ----- |
+| Edge1 | Node1 | Node2 | red |
+| Edge2 | Node2 | Node3 | blue |
+
+Clusters Tab Example:
+
+| ID | Nodes | 
+| -- | ------ |
+| group1 | Node1,Node2 | 
+| group2 | Node2,Node3 |  
+
 
 
 
